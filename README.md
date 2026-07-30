@@ -70,11 +70,17 @@
 ### 🛠️ 코드 작성 과정
 
 [1단계 : Knowledge Structuring] : Obsidian 기반 연구 도메인 지식 체계화 
+
 [2단계 : Prompt & Context Injection] : RAG-CLI 연동 (Codex + Ollama Gemma4 26B/31B)
+
 [3단계 : Code Generation & Scaffolding] : 모듈화 분석 스크립트 및 테스트 케이스 자동 생성
+
 [4단계 : Human in the Loop Audit] : 연구자의 학술적/수학적 코드 감사 및 수정
+
 [5단계 : Isolated Execution & validation] : 격리된 환경 실행, CI/CD 수치 검증
+
 [6단계 : Scientific Synthesis] : 정량 수치 종합 및 연구자의 해양학/통계적 수치 해석
+
 
 ### 📌 원본 코드 제공 및 열람 조건 (Conditions for Access)
 
