@@ -19,7 +19,7 @@
 
 본 프로젝트의 분석 및 파이프라인 구축에 사용된 핵심 환경과 제3자 패키지 라이브러리 명세입니다. 이 패키지 목록은 기준 분석환경이며, 내부 스냅샷 및 폐쇄형 모듈에 의존하므로 라이브러리 설치만으로 전체 실행환경을 복구할 수 없습니다.
 
-* **Development Environment:** Windows 10, Python 3.13.5, Visual Studio Code, Codex
+* **Development Environment:** Windows 10, Python 3.13.5, Visual Studio Code, Codex, ollama Gemma4 (26B, 31B)
   * (Codex-5.5 : 사용자가 사전에 설정한 파이프 라인에 따른 코드 초안 작성)
   * (GPU 가속 프레임워크나 CUDA 연산은 사용하지 않은 CPU 기반 연산 환경입니다.)
 * **Core Numerical & Scientific Stack:**
@@ -43,10 +43,10 @@
 
 ### 1. 인프라 정보 노출에 따른 서버 보안 취약점 (Information Disclosure Vulnerability)
 소스 코드 내부에는 연구 전용 서버의 절대 마운트 경로(e.g., `/mnt/data/...`), 내부 파일명 규칙 및 입출력 배치가 포함되어 있습니다. 
-* **발생 문제:** 이 코드가 무분별하게 퍼블릭으로 노출될 경우 물리적·논리적 저장영역의 배치, 외부자료와 내부자료가 결합되는 처리 지점 등이 노출됩니다. 이는 공격자가 시스템의 구조를 사전 정찰하는 데 사용되어 시스템 침투 공격의 표면(Attack Surface)을 확대하는 정보노출 취약성을 발생시킵니다.
+* **발생 문제:** 이 코드가 무분별하게 퍼블릭으로 노출될 경우 물리적·논리적 저장영역의 배치, 외부자료와 내부자료가 결합되는 처리 지점 등이 노출됩니다. 이는 공격자가 시스템의 구조를 사전 정찰하는 데 사용되어 시스템 침투 공격의 표면을 확대하는 정보노출 취약성을 발생시킵니다.
 
 ### 2. 오케스트레이션 및 파이프라인 무결성 훼손 (Control Plane Integrity Issue)
-본 파이프라인은 단순 스크립트가 아니라, 데이터 오염과 환각(Hallucination)을 막기 위해 각 분석단계의 개방·차단, 검증순서, 상위 산출물 권위를 관리하는 **프로젝트 전용 제어면**입니다.
+본 파이프라인은 단순 스크립트가 아니라, 데이터 오염과 환각(Hallucination)을 막기 위해 각 분석단계의 개방·차단, 검증순서, 상위 산출물 권위를 관리하는 **프로젝트 전용 제어 프로토콜**입니다.
 * **발생 문제:** 소스 코드에는 Stage-Gate 제어, 자동 검증 레코드(`V001`~`V050`), 생산 코드와 독립 검증기의 이중 확인 로직이 통합되어 있습니다. 제어 로직이 실행 맥락과 분리된 상태로 공개되면, 파이프라인 무결성이 훼손될 수 있습니다.
 
 ### 3. 폐쇄형 런타임 종속성으로 인한 계보 단절 및 허위 재현성 (Runtime Confounding & False Reproducibility)
@@ -66,6 +66,15 @@
 ## 🛠️ Code Access & Original Source Release Policy
 
 본 저장소의 코드 및 관련 자료는 심사 및 평가와 관련한 공식적인 요청이 있는 경우에 한해, 내부 시스템 경로 및 오케스트레이션 로직 등 그 어떠한 정보도 삭제하지 않은 **원본 코드(Original Source Code) 전체를 아래 조건에 따라 제공**할 수 있습니다. (단, 외부 API 통신을 위한 개인 자격증명 및 인증 토큰은 보안상 제외됩니다.)
+
+### 🛠️ 코드 작성 과정
+
+[1단계 : Knowledge Structuring] : Obsidian 기반 연구 도메인 지식 체계화 
+[2단계 : Prompt & Context Injection] : RAG-CLI 연동 (Codex + Ollama Gemma4 26B/31B)
+[3단계 : Code Generation & Scaffolding] : 모듈화 분석 스크립트 및 테스트 케이스 자동 생성
+[4단계 : Human in the Loop Audit] : 연구자의 학술적/수학적 코드 감사 및 수정
+[5단계 : Isolated Execution & validation] : 격리된 환경 실행, CI/CD 수치 검증
+[6단계 : Scientific Synthesis] : 정량 수치 종합 및 연구자의 해양학/통계적 수치 해석
 
 ### 📌 원본 코드 제공 및 열람 조건 (Conditions for Access)
 
@@ -90,7 +99,7 @@
 
 ## 📢 LICENSE
 
-모든 일정이 종료되기 전까지 다음의 `LICENSE`를 따릅니다. 
+일정 종료까지, 다음의 `LICENSE`를 따릅니다. 
 ```
 Copyright (c) 2026 [일정 종료까지 비공개 / 어쩌다 북극해]. All rights reserved.
 
@@ -98,5 +107,3 @@ No part of this software, including source code, pipeline architecture, and meta
 may be reproduced, distributed, or transmitted in any form or by any means, 
 without the prior written permission of the copyright holder.
 ```
-
-(모든 일정 종료 후, MIT/Apache2.0 변경 예정)
