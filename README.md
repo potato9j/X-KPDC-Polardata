@@ -47,7 +47,7 @@
 * **발생 문제:** 이 코드가 무분별하게 퍼블릭으로 노출될 경우 물리적·논리적 저장영역의 배치, 외부자료와 내부자료가 결합되는 처리 지점 등이 노출됩니다. 이는 공격자가 시스템의 구조를 사전 정찰하는 데 사용되어 시스템 침투 공격의 표면(Attack Surface)을 확대하는 정보노출 취약성을 발생시킵니다.
 
 ### 2. 오케스트레이션 및 파이프라인 무결성 훼손 (Control Plane Integrity Issue)
-본 파이프라인은 단순 스크립트가 아니라, 데이터 오염과 환각(Hallucination)을 막기 위해 각 분석단계의 개방·차단, 검증순서, 상위 산출물 권위를 관리하는 **프로젝트 전용 제어면(Control Plane)**입니다.
+본 파이프라인은 단순 스크립트가 아니라, 데이터 오염과 환각(Hallucination)을 막기 위해 각 분석단계의 개방·차단, 검증순서, 상위 산출물 권위를 관리하는 **프로젝트 전용 제어면**입니다.
 * **발생 문제:** 소스 코드에는 Stage-Gate 제어, 자동 검증 레코드(`V001`~`V050`), 생산 코드와 독립 검증기의 이중 확인 로직이 통합되어 있습니다. 제어 로직이 실행 맥락과 분리된 상태로 공개되면, 파이프라인 무결성이 훼손될 수 있습니다.
 
 ### 3. 폐쇄형 런타임 종속성으로 인한 계보 단절 및 허위 재현성 (Runtime Confounding & False Reproducibility)
@@ -86,3 +86,16 @@
 
 5. **원시 데이터 연동에 관한 고지 (Raw Data Provisioning Notice)**
    * 원본 코드를 완전하게 종단간(End-to-End) 재실행하기 위해서는 약 18.1 GB 규모의 대용량 원시 데이터 및 내부 스냅샷이 필요합니다. 전체 파이프라인 구동이 필수적인 심사 단계일 경우, 해당 원시 데이터의 안전한 전달 및 마운트 방식은 별도로 협의해야 합니다.
+  
+---
+
+## 📢 LICENSE
+
+모든 일정이 종료되기 전까지 다음의 `LICENSE`를 따릅니다. 
+```
+Copyright (c) 2026 [일정 종료까지 비공개 / 어쩌다 북극해]. All rights reserved.
+
+No part of this software, including source code, pipeline architecture, and metadata, 
+may be reproduced, distributed, or transmitted in any form or by any means, 
+without the prior written permission of the copyright holder.
+```
