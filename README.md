@@ -34,7 +34,6 @@
   * `rasterio == 1.5.0` / `h5py == 3.15.1`
 * **Visualization & Inspection:**
   * `matplotlib == 3.10.8` / `basemap == 2.0.0`
-  * `PyMuPDF == 1.26.7` / `Pillow == 12.2.0`
 
 ---
 
