@@ -99,3 +99,5 @@ No part of this software, including source code, pipeline architecture, and meta
 may be reproduced, distributed, or transmitted in any form or by any means, 
 without the prior written permission of the copyright holder.
 ```
+
+(모든 일정 종료 후, MIT/Apache2.0 변경 예정)
