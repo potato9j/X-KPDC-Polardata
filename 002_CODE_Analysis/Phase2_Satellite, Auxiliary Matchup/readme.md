@@ -1,8 +1,8 @@
 | file name | subject | summary |
 | --- | --- | --- |
-| calc_match_rates.py | 
-| ingest_gebco.py |
-| ingest_modis.py |
-| ingest_nsidc.py |
-| ingest_oisst.py |
-| match_station_grid.py | 
+| calc_match_rates.py | 위성 추출 윈도우 평가 및 결측 요인 분류 | 격자 반경 내 픽셀 통계(유효 픽셀 수, 비율, CV)를 기반으로 등급을 매기고, 매치업에 실패했을 경우 원인을 추적 |
+| ingest_gebco.py | 해저 지형(GEBCO) 타일 라우팅 및 육지/해양 판별 | 관측 경도를 정규화한 뒤, 위/경도 경계를 기준으로 데이터를 사용할 GEBCO(EAST/WEST)을 지정하고 수심의 유효성을 판별 | 
+| ingest_modis.py | 위성 추출 윈도우 평가 및 결측 요인 분류 | 격자 반경 내 픽셀 통계(유효 픽셀 수, 비율, CV)를 기반으로 등급을 매기고, 매치업에 실패했을 경우 원인을 추적 |
+| ingest_nsidc.py | 비트 연산 기반 해빙 품질(QA) 판별 | NSIDC 해빙 농도 데이터에 포함된 8비트 QA 플래그를 비트 마스킹 기법으로 해독하여, 기상 필터링, 공간/시간 보간 여부, 해빙 상태 등을 판별하는 로직 |
+| ingest_oisst.py | OISSIT 처리 기간(Era) 및 스케일링 적용 | OSSIT제품의 갱신 역사(ACSPO전환, 선박 편향 보정 등)에 따라 처리 기간(Era)을 분류하고, Raw 데이터에 스케일 팩터를 적용해 실제 수온으로 복호화 |  
+| match_station_grid.py | - 2D 이중 선형 보간법 <br> - 비트 연산 기반 해빙 품질(QA) 판별 | - 관측 정점의 좌표가 4개의 격자 픽셀 중심점 사이에 위치할 때, 주변 4개 픽셀의 값을 거리에 반비례하여 가중 평균하는 보간 로직 <br> - NSIDC 해빙 농도 데이터에 포함된 8비트 QA 플래그를 비트 마스킹 기법으로 해독하여, 기상 필터링, 공간/시간 보간 여부, 해빙 상태 등을 판별하는 로직 |
