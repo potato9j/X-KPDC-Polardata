@@ -5,8 +5,7 @@
 ### [어쩌다 북극해]
 
 2015–2023년 KPDC/ARAON 서부 북극해 하계 항차의 200개 수직 프로파일을 이용하여 표층 Chl-a의 수주 대표성, SCM 수직구조, 항차 외부 예측성능과 MODIS 위성 관측가능성을 평가한 데이터 분석 연구 프로젝트입니다.
-
- 규정에 따라, 신원을 유추 또는 확인할 수 있는 정보는 포함되지 않았습니다. 
+ 
 
 </div>
 
@@ -20,8 +19,6 @@
 본 프로젝트의 분석 및 파이프라인 구축에 사용된 핵심 환경과 제3자 패키지 라이브러리 명세입니다. 이 패키지 목록은 기준 분석환경이며, 내부 스냅샷 및 폐쇄형 모듈에 의존하므로 라이브러리 설치만으로 전체 실행환경을 복구할 수 없습니다.
 
 * **Development Environment:** Windows 10, Python 3.13.5, Visual Studio Code, Codex, ollama Gemma4 (26B, 31B)
-  * (Codex-5.5 : 사용자가 사전에 설정한 파이프 라인에 따른 코드 초안 작성)
-  * (GPU 가속 프레임워크나 CUDA 연산은 사용하지 않은 CPU 기반 연산 환경입니다.)
 * **Core Numerical & Scientific Stack:**
   * `numpy == 2.3.5`
   * `pandas == 2.2.3`
@@ -37,9 +34,15 @@
 
 ---
 
+### 프로젝트 종료에 따른 코드 공개
+
+- 프로젝트 종료에 따라, 본 저장소에 일부 민감한 정보 정제를 완료한 코드를 공개합니다. (26.08.27)
+- ***이하 `🔒 Code Non-Disclosure & Security Governance` 삭제***
+
+```markdown
 ## 🔒 Code Non-Disclosure & Security Governance
 
-본 저장소에는 연구결과와 분석 거버넌스의 감사가능성(auditability) 및 추적가능성(traceability)을 제공하기 위한 문서가 포함되어 있으며, **원본 실행 스크립트 모듈은 통제된 비공개 상태 혹은 중요 보안 요소가 정제된 임시 공개 상태로 관리됩니다.** 코드를 제한하거나 비공개로 유지하는 구체적인 시스템 요구사항 및 기술적 사유는 다음과 같습니다.
+본 저장소에는 연구결과와 분석 거버넌스의 감사 가능성(auditability) 및 추적가능성(traceability)을 제공하기 위한 문서가 포함되어 있으며, **원본 실행 스크립트 모듈은 통제된 비공개 상태 혹은 중요 보안 요소가 정제된 임시 공개 상태로 관리됩니다.** 코드를 제한하거나 비공개로 유지하는 구체적인 시스템 요구사항 및 기술적 사유는 다음과 같습니다.
 
 ### 1. 인프라 정보 노출에 따른 서버 보안 취약점 (Information Disclosure Vulnerability)
 소스 코드 내부에는 연구 전용 서버의 절대 마운트 경로(e.g., `/mnt/data/...`), 내부 파일명 규칙 및 입출력 배치가 포함되어 있습니다. 
@@ -60,7 +63,7 @@
 ### 5. 외부 데이터 프로바이더 인증 자산 보호 및 어뷰징 차단 (Provider Credential & Quota Protection)
 본 파이프라인은 위성 관측 자료(NASA Earthdata, Copernicus 등)의 자동화된 수집을 위해 외부 데이터 플랫폼의 API와 통신하며, 이 과정에서 고유 인증 토큰(Access Token/API Key) 및 세션 자격 증명이 사용됩니다.
 * **발생 문제:** 데이터 자체는 오픈 데이터(Open Data)이나, 이를 호출하는 개인 인증 키가 퍼블릭 레포지토리에 노출될 경우 제3자의 무단 트래픽 도용 및 대규모 쿼터(Quota) 초과 어뷰징의 타겟이 됩니다. 이는 데이터 제공 기관의 보안 정책(Terms of Service)을 심각하게 위반하는 행위이며 시스템 접근 권한이 영구 차단(Ban)되는 보안 사고로 직결되므로, 인증 자산이 완전 정제(Scrubbing) 및 추상화되지 않은 원본 수집 스크립트의 노출을 엄격히 금지합니다.
-
+```
 ---
 
 ## 🛠️ Code Access & Original Source Release Policy
@@ -69,17 +72,17 @@
 
 ### 🛠️ 코드 작성 과정
 
-[1단계 : Knowledge Structuring] : Obsidian 기반 연구 도메인 지식 체계화 
+**[1단계 : Knowledge Structuring]** : Obsidian 기반 연구 도메인 지식 체계화 
 
-[2단계 : Prompt & Context Injection] : RAG-CLI 연동 (Codex + Ollama Gemma4 26B/31B)
+**[2단계 : Prompt & Context Injection]** : RAG-CLI 연동 (Codex + Ollama Gemma4 26B/31B)
 
-[3단계 : Code Generation & Scaffolding] : 모듈화 분석 스크립트 및 테스트 케이스 자동 생성
+**[3단계 : Code Generation & Scaffolding]** : 모듈화 분석 스크립트 및 테스트 케이스 자동 생성
 
-[4단계 : Human in the Loop Audit] : 연구자의 학술적/수학적 코드 감사 및 수정
+**[4단계 : Human in the Loop Audit]** : 연구자의 학술적/수학적 코드 감사 및 수정
 
-[5단계 : Isolated Execution & validation] : 격리된 환경 실행, CI/CD 수치 검증
+**[5단계 : Isolated Execution & validation]** : 격리된 환경 실행, CI/CD 수치 검증
 
-[6단계 : Scientific Synthesis] : 정량 수치 종합 및 연구자의 해양학/통계적 수치 해석
+**[6단계 : Scientific Synthesis]** : 정량 수치 종합 및 연구자의 해양학/통계적 수치 해석
 
 
 ### 📌 원본 코드 제공 및 열람 조건 (Conditions for Access)
@@ -104,10 +107,9 @@
 ---
 
 ## 📢 LICENSE
-
-일정 종료까지, 다음의 `LICENSE`를 따릅니다. 
+ 
 ```
-Copyright (c) 2026 [일정 종료까지 비공개 / 어쩌다 북극해]. All rights reserved.
+Copyright (c) 2026 [어쩌다 북극해]. All rights reserved.
 
 No part of this software, including source code, pipeline architecture, and metadata, 
 may be reproduced, distributed, or transmitted in any form or by any means, 
